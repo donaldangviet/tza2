@@ -1,0 +1,15 @@
+version: 2
+updates: 
+  - package-ecosysytem: "nuget"
+    directory: "/"
+    schedule:
+      intervarl: "daily"
+    labels"
+- "infrastructrue"
+- "dependencies"
+ignore: 
+- dependency-name: "tr"
+dicrectory: "/"
+- package-ecosystem: "nuget"
+directory: "/_scripts/templates/CSharp"
+schedule
