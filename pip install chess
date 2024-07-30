@@ -1,0 +1,103 @@
+import chess
+import chess.svg
+import random
+
+def print_board(board):
+    print(board)
+
+def get_human_move(board):
+    while True:
+        try:
+            move = input("Enter your move: ")
+            move = chess.Move.from_uci(move)
+            if move in board.legal_moves:
+                return move
+            else:
+                print("Invalid move. Try again.")
+        except ValueError:
+            print("Invalid move format. Use UCI format (e.g., e2e4).")
+
+def get_random_move(board):
+    return random.choice(list(board.legal_moves))
+
+def play_game():
+    board = chess.Board()
+
+    print("Welcome to Chess!")
+    print_board(board)
+
+    while not board.is_game_over():
+        if board.turn == chess.WHITE:
+            print("White's turn")
+            move = get_human_move(board)
+        else:
+            print("Black's turn")
+            move = get_random_move(board)
+
+        board.push(move)
+        print_board(board)
+        print()
+
+    result = board.result()
+    if result == '1-0':
+        print("White wins!")
+    elif result == '0-1':
+        print("Black wins!")
+    else:
+        print("It's a draw!")
+
+if __name__ == "__main__":
+    play_game()
+import chess
+
+def print_board(board):
+    # Print the board in ASCII format
+    print(board)
+
+def get_player_move(board):
+    while True:
+        try:
+            move = input("Enter your move in UCI format (e.g., e2e4): ")
+            move = chess.Move.from_uci(move)
+            if move in board.legal_moves:
+                return move
+            else:
+                print("Illegal move. Please try again.")
+        except ValueError:
+            print("Invalid move format. Please use UCI format.")
+
+def play_game():
+    board = chess.Board()
+
+    print("Welcome to Chess!")
+    print_board(board)
+
+    while not board.is_game_over():
+        if board.turn == chess.WHITE:
+            print("White's turn")
+        else:
+            print("Black's turn")
+
+        move = get_player_move(board)
+        board.push(move)
+        print_board(board)
+
+    print("Game over!")
+    if board.is_checkmate():
+        if board.turn == chess.WHITE:
+            print("Black wins by checkmate!")
+        else:
+            print("White wins by checkmate!")
+    elif board.is_stalemate():
+        print("The game is a draw by stalemate!")
+    elif board.is_insufficient_material():
+        print("The game is a draw due to insufficient material!")
+    elif board.is_seventyfive_moves():
+        print("The game is a draw due to the seventy-five-move rule!")
+    elif board.is_fivefold_repetition():
+        print("The game is a draw due to fivefold repetition!")
+    else:
+        print("The game is a draw!")
+
+if __name__ == "__main__":
+    play_game()
